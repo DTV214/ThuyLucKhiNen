@@ -1,0 +1,20 @@
+"use client";
+
+import { Minus, Plus, Send } from "lucide-react";
+import { FormEvent, useState } from "react";
+
+type QuoteFormProps = Readonly<{ productName: string }>;
+
+export function QuoteForm({ productName }: QuoteFormProps) {
+  const [quantity, setQuantity] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitted(true);
+  }
+
+  return (
+    <section id="bao-gia" className="relative overflow-hidden rounded-2xl bg-surface p-7 shadow-sm"><div aria-hidden="true" className="absolute right-0 top-0 size-32 rounded-bl-full bg-primary/5" /><div className="relative"><span className="rounded bg-primary-container px-3 py-1 text-label-sm font-semibold text-on-primary-container">B2B NHANH</span><h2 className="mt-3 text-headline-sm font-semibold text-on-surface">Yêu cầu báo giá (RFQ)</h2><p className="mt-1 text-body-md text-outline">Nhận báo giá dự án và VAT trong vòng 15 phút.</p>{submitted ? <div role="status" className="mt-6 rounded-xl bg-emerald-50 p-4 text-body-md text-emerald-800">Cảm ơn bạn. Yêu cầu báo giá cho <strong>{productName}</strong> đã được ghi nhận. Kỹ sư CTY ThanhDanh-VMC sẽ liên hệ sớm.</div> : <form onSubmit={handleSubmit} className="mt-6 space-y-4"><div><label className="text-label-md font-semibold text-on-surface">Số lượng thiết bị</label><div className="mt-2 flex items-center gap-3"><button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))} className="inline-flex size-10 items-center justify-center rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high" aria-label="Giảm số lượng"><Minus className="size-4" /></button><output className="w-16 rounded-xl bg-surface-container py-2 text-center text-body-md font-bold text-on-surface">{quantity}</output><button type="button" onClick={() => setQuantity((value) => value + 1)} className="inline-flex size-10 items-center justify-center rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high" aria-label="Tăng số lượng"><Plus className="size-4" /></button><span className="text-body-md text-outline">Cái / Trạm</span></div></div><div><label htmlFor="company" className="text-label-md font-semibold text-on-surface">Tên công ty / Doanh nghiệp *</label><input id="company" name="company" required placeholder="Ví dụ: Công ty Cổ phần Cơ khí Miền Nam" className="mt-1.5 w-full rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2.5 text-body-md outline-none placeholder:text-outline focus:border-primary" /></div><div className="grid gap-4 sm:grid-cols-2"><div><label htmlFor="contact-name" className="text-label-md font-semibold text-on-surface">Người liên hệ *</label><input id="contact-name" name="contactName" required placeholder="Nguyễn Văn A" className="mt-1.5 w-full rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2.5 text-body-md outline-none placeholder:text-outline focus:border-primary" /></div><div><label htmlFor="phone" className="text-label-md font-semibold text-on-surface">Điện thoại / Zalo *</label><input id="phone" name="phone" required type="tel" placeholder="0909 xxx xxx" className="mt-1.5 w-full rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2.5 text-body-md outline-none placeholder:text-outline focus:border-primary" /></div></div><div><label htmlFor="requirements" className="text-label-md font-semibold text-on-surface">Yêu cầu kỹ thuật bổ sung</label><textarea id="requirements" name="requirements" rows={3} placeholder="Co nối, mặt bích hoặc yêu cầu test áp..." className="mt-1.5 w-full resize-y rounded-xl border border-outline-variant/40 bg-surface-container px-4 py-2.5 text-body-md outline-none placeholder:text-outline focus:border-primary" /></div><button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-label-md font-semibold text-on-primary shadow-lg shadow-primary/20 transition hover:bg-primary-container"><Send className="size-4" />Gửi yêu cầu báo giá nhanh</button></form>}</div></section>
+  );
+}

@@ -1,0 +1,10 @@
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, ClipboardPlus } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { featuredProducts } from "@/features/home/data/home-data";
+
+export function FeaturedProductsSection() {
+  return (
+    <section className="bg-surface-container-low px-gutter py-20"><div className="mx-auto max-w-7xl"><Reveal><p className="text-label-md font-semibold uppercase tracking-wider text-primary">Sản phẩm bán chạy</p><h2 className="mt-2 text-headline-lg font-bold text-on-surface">Thiết bị Công nghiệp Hàng đầu</h2></Reveal><div className="mt-10 grid gap-6 lg:grid-cols-3">{featuredProducts.map((product, index) => <Reveal key={product.code} delay={index * 0.06}><article className="flex h-full flex-col rounded-2xl bg-surface p-6 shadow-sm"><div className="flex items-start justify-between gap-3"><span className="text-label-sm font-semibold tracking-wide text-primary">Mã: {product.code}</span><span className="inline-flex shrink-0 items-center gap-1 text-label-sm font-medium text-secondary"><CheckCircle2 className="size-4" />{product.status}</span></div><h3 className="mt-4 text-headline-sm font-semibold text-on-surface">{product.name}</h3><p className="mt-1 text-body-md text-on-surface-variant">{product.brand}</p><ul className="mt-5 space-y-2 rounded-xl bg-surface-container-low p-4 text-body-sm text-on-surface-variant">{product.specifications.map((spec) => <li key={spec}>{spec}</li>)}</ul><div className="mt-6 grid grid-cols-2 gap-3"><Link href={product.href} className="inline-flex items-center justify-center gap-1 rounded-lg bg-surface-container px-3 py-2.5 text-label-sm font-semibold text-on-surface transition hover:bg-surface-container-high">Chi tiết <ArrowRight className="size-4" /></Link><Link href="/yeu-cau-bao-gia" className="inline-flex items-center justify-center gap-1 rounded-lg bg-primary-container px-3 py-2.5 text-label-sm font-semibold text-on-primary-container transition hover:bg-primary"><ClipboardPlus className="size-4" />Báo giá</Link></div></article></Reveal>)}</div></div></section>
+  );
+}
