@@ -1,7 +1,8 @@
 "use client";
 
-import { Filter, RotateCcw, Wrench } from "lucide-react";
+import { Filter, Menu, RotateCcw, Wrench } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import type { PublicEntity } from "@/features/core/api/public-api";
 
 type FilterSidebarProps = Readonly<{
@@ -15,6 +16,7 @@ type FilterSidebarProps = Readonly<{
 /** Updates category/brand URL params; the page fetches and renders matching data on the server. */
 export function FilterSidebar({ categories, brands, selectedCategoryId = "", selectedBrandId = "", search = "" }: FilterSidebarProps) {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = (categoryId: string, brandId: string) => {
     const params = new URLSearchParams();
@@ -33,6 +35,12 @@ export function FilterSidebar({ categories, brands, selectedCategoryId = "", sel
           <button type="button" onClick={() => navigate("", "")} className="inline-flex items-center gap-1 text-body-sm font-medium text-primary hover:underline"><RotateCcw className="size-3.5" />Đặt lại</button>
         </div>
 
+        <button type="button" onClick={() => setIsOpen((open) => !open)} aria-expanded={isOpen} aria-controls="catalog-filters" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant/30 bg-surface-container-low px-4 py-3 text-label-md font-semibold text-primary transition hover:bg-primary-fixed/40 lg:hidden">
+          <Menu className="size-4" aria-hidden="true" />
+          {isOpen ? "Ẩn bộ lọc" : "Hiển thị bộ lọc"}
+        </button>
+
+        <div id="catalog-filters" className={`${isOpen ? "block" : "hidden"} lg:block`}>
         <fieldset className="mt-6">
           <legend className="text-label-md font-semibold uppercase tracking-wide text-on-surface">Danh mục thiết bị</legend>
           <div className="mt-3 space-y-3">
@@ -54,6 +62,7 @@ export function FilterSidebar({ categories, brands, selectedCategoryId = "", sel
             }) : <p className="text-body-sm text-on-surface-variant">Chưa có dữ liệu.</p>}
           </div>
         </fieldset>
+        </div>
       </div>
       <section className="mt-6 rounded-2xl bg-surface-container p-6" aria-labelledby="technical-support-title">
         <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary"><Wrench className="size-5" /></span>

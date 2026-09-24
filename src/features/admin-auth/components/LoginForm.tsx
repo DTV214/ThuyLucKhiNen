@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { Building2, CircleHelp, Eye, EyeOff, KeyRound, LoaderCircle, LogIn, ShieldCheck, UserPlus, UserRound } from "lucide-react";
+import { Building2, CircleHelp, Eye, EyeOff, KeyRound, LoaderCircle, LogIn, ShieldCheck, UserRound } from "lucide-react";
 import { login } from "@/features/admin-auth/actions/login";
 import { loginInitialState } from "@/features/admin-auth/data/login-state";
 
@@ -57,7 +56,6 @@ export function LoginForm() {
 
       {state.error ? <p role="alert" className="rounded-lg bg-error-container px-3 py-2.5 text-body-sm text-on-error-container">{state.error}</p> : null}
       <SubmitButton />
-      <Link href="/admin/register" className="inline-flex items-center justify-center gap-1.5 text-label-sm font-semibold text-primary hover:underline"><UserPlus aria-hidden="true" className="size-4" />Khởi tạo tài khoản Admin lần đầu</Link>
     </form>
   );
 }

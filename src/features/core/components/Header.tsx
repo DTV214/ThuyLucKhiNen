@@ -52,7 +52,7 @@ export function Header() {
         </nav>
         <ContactPrompt label="Liên hệ ngay" className="hidden items-center gap-2 rounded-xl bg-primary-container px-4 py-2.5 text-label-md font-semibold text-on-primary-container shadow-sm transition-colors hover:bg-primary sm:inline-flex" />
         {/* Native details keeps the initial mobile menu accessible without client-side JavaScript. */}
-        <details className="relative xl:hidden">
+        <details className="relative ml-auto xl:ml-0 xl:hidden">
           <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-xl text-on-surface hover:bg-surface-container [&::-webkit-details-marker]:hidden">
             <Menu aria-hidden="true" className="size-5" />
             <span className="sr-only">Mở menu điều hướng</span>
@@ -67,12 +67,19 @@ export function Header() {
                 </li>
               ))}
             </ul>
-            <form action="/san-pham" method="get" role="search" className="mt-3 border-t border-outline-variant/20 pt-3 lg:hidden">
+            <form action="/san-pham" method="get" role="search" className="hidden">
               <label htmlFor="site-search-mobile" className="sr-only">Tìm kiếm theo tên hoặc SKU sản phẩm</label>
               <div className="relative"><Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-outline" /><input id="site-search-mobile" name="search" type="search" placeholder="Tìm tên hoặc SKU..." className="h-10 w-full rounded-lg border border-outline-variant/40 bg-surface-container py-2 pl-10 pr-3 text-body-sm outline-none focus:border-primary" /></div>
             </form>
           </nav>
         </details>
+      </div>
+      <div className="border-t border-outline-variant/20 px-gutter py-3 lg:hidden">
+        <form action="/san-pham" method="get" role="search" className="relative mx-auto max-w-7xl">
+          <label htmlFor="site-search-compact" className="sr-only">Tìm kiếm theo tên hoặc SKU sản phẩm</label>
+          <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-outline" />
+          <input id="site-search-compact" name="search" type="search" placeholder="Tìm tên sản phẩm hoặc SKU..." className="h-11 w-full rounded-xl border border-outline-variant/40 bg-surface-container py-2 pl-10 pr-4 text-body-md outline-none transition-colors placeholder:text-outline focus:border-primary" />
+        </form>
       </div>
     </header>
   );

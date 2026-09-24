@@ -25,7 +25,7 @@ export function ProductGrid({ products }: ProductGridProps) {
         const specs = product.technicalSpecs.slice(0, 3);
 
         return (
-          <article key={product.id} className="flex min-w-0 flex-col rounded-xl bg-surface-container-lowest p-5 shadow-sm transition-shadow hover:shadow-md">
+          <article key={product.id} className="flex h-full min-w-0 flex-col rounded-xl bg-surface-container-lowest p-5 shadow-sm transition-shadow hover:shadow-md">
             <div className="relative flex h-48 items-center justify-center overflow-hidden rounded-lg bg-surface-container">
               {product.imageUrl ? (
                 <Image src={product.imageUrl} alt={product.name} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover" />
@@ -38,11 +38,11 @@ export function ProductGrid({ products }: ProductGridProps) {
             </div>
 
             <p className="mt-4 text-label-sm font-semibold tracking-wide text-primary">SKU: {product.sku || "Chưa cập nhật"}</p>
-            <h2 className="mt-2 text-headline-sm font-semibold text-on-surface">{product.name}</h2>
-            <p className="mt-1 text-body-sm text-on-surface-variant">{product.brandName}</p>
+            <h2 className="mt-2 line-clamp-2 h-14 text-headline-sm font-semibold leading-7 text-on-surface" title={product.name}>{product.name}</h2>
+            <p className="mt-1 h-5 truncate text-body-sm text-on-surface-variant">{product.brandName}</p>
 
             {specs.length ? (
-              <dl className="mt-4 space-y-1 rounded-lg bg-surface-container-low p-3 text-body-sm text-on-surface-variant">
+              <dl className="mt-4 h-[104px] space-y-1 overflow-hidden rounded-lg bg-surface-container-low p-3 text-body-sm text-on-surface-variant">
                 {specs.map((spec) => (
                   <div key={`${product.id}-${spec.label}`} className="flex justify-between gap-3">
                     <dt>{spec.label}:</dt>
@@ -51,10 +51,12 @@ export function ProductGrid({ products }: ProductGridProps) {
                 ))}
               </dl>
             ) : (
+              <div className="h-[104px]">
               <p className="mt-4 rounded-lg bg-surface-container-low p-3 text-body-sm text-on-surface-variant">Liên hệ để nhận thông số kỹ thuật chi tiết.</p>
+              </div>
             )}
 
-            <div className="mt-4 rounded-lg border border-primary/15 bg-primary/5 p-3">
+            <div className="mt-4 h-[68px] rounded-lg border border-primary/15 bg-primary/5 p-3">
               <p className="text-body-sm text-on-surface-variant">Giá: <strong className="text-on-surface">Liên hệ Hotline</strong></p>
               <ContactPrompt label="Xem số hotline" className="mt-1 inline-flex items-center gap-1.5 text-label-sm font-semibold text-primary hover:underline" />
             </div>
