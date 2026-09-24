@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, MessageCircleMore, PhoneCall, ReceiptText, UserRound } from "lucide-react";
-import { ContactForm } from "@/features/contact/components/ContactForm";
+import { Mail, MapPin, MessageCircleMore, ReceiptText, UserRound } from "lucide-react";
 import { companyInfo } from "@/features/core/data/company-info";
+import { ContactPrompt } from "@/features/core/components/ContactPrompt";
 
 export const metadata: Metadata = {
   title: "Liên hệ & Báo giá | CTY ThanhDanh-VMC",
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 const contactDetails = [
-  { label: "Hotline tư vấn", value: companyInfo.phoneDisplay, href: companyInfo.primaryPhoneHref, icon: PhoneCall },
   { label: "Email kinh doanh", value: companyInfo.email, href: companyInfo.emailHref, icon: Mail },
   { label: "Zalo tư vấn", value: companyInfo.phoneDisplay, href: companyInfo.zaloHref, icon: MessageCircleMore },
 ] as const;
@@ -27,7 +26,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 max-w-4xl">
           <section className="rounded-2xl bg-surface p-7 shadow-sm sm:p-8" aria-labelledby="contact-info-title">
             <h2 id="contact-info-title" className="text-headline-md font-bold text-on-surface">Thông tin doanh nghiệp</h2>
             <p className="mt-3 text-body-md leading-6 text-on-surface-variant">{companyInfo.legalName}</p>
@@ -45,6 +44,7 @@ export default function ContactPage() {
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-fixed text-primary"><ReceiptText className="size-5" /></span>
                 <span><small className="block text-body-sm text-outline">Mã số thuế</small><strong className="text-body-md text-on-surface">{companyInfo.taxCode}</strong></span>
               </div>
+              <div className="rounded-xl p-2"><small className="mb-1 block text-body-sm text-outline">Hotline tư vấn</small><ContactPrompt label={companyInfo.phoneDisplay} className="inline-flex items-center gap-2 text-body-md font-bold text-on-surface transition hover:text-primary" /></div>
               {contactDetails.map(({ icon: Icon, ...detail }) => (
                 <a key={detail.label} href={detail.href} className="flex items-start gap-3 rounded-xl p-2 transition hover:bg-surface-container-low">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-fixed text-primary"><Icon className="size-5" /></span>
@@ -58,7 +58,6 @@ export default function ContactPage() {
             </div>
             <p className="mt-3 inline-flex items-center gap-1 text-body-sm text-on-surface-variant"><MapPin className="size-4 text-primary" />{companyInfo.warehouseAddress}</p>
           </section>
-          <ContactForm />
         </div>
       </div>
     </section>

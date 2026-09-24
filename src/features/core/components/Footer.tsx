@@ -1,30 +1,31 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, PhoneCall, ReceiptText, UserRound } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, ReceiptText, UserRound } from "lucide-react";
 import { companyInfo } from "@/features/core/data/company-info";
+import { ContactPrompt } from "@/features/core/components/ContactPrompt";
 
 const footerColumns = [
   {
     title: "Danh mục sản phẩm",
     links: [
-      { href: "/san-pham/bom-thuy-luc", label: "Bơm thủy lực" },
-      { href: "/san-pham/xi-lanh", label: "Xi lanh công nghiệp" },
-      { href: "/san-pham/van-thuy-luc", label: "Van thủy lực" },
-      { href: "/san-pham/tram-nguon", label: "Trạm nguồn thủy lực" },
+      { href: "/san-pham", label: "Bơm thủy lực" },
+      { href: "/san-pham", label: "Xi lanh công nghiệp" },
+      { href: "/san-pham", label: "Van thủy lực" },
+      { href: "/san-pham", label: "Trạm nguồn thủy lực" },
     ],
   },
   {
     title: "Tài nguyên kỹ thuật",
     links: [
       { href: "/cam-nang", label: "Cẩm nang chọn thiết bị" },
-      { href: "/tai-nguyen/catalogue", label: "Catalogue thiết bị" },
-      { href: "/tai-nguyen/bang-thong-so", label: "Bảng tra thông số" },
-      { href: "/tai-nguyen/chung-chi", label: "Tài liệu CO/CQ" },
+      { href: "/cam-nang", label: "Catalogue thiết bị" },
+      { href: "/cam-nang", label: "Bảng tra thông số" },
+      { href: "/cam-nang", label: "Tài liệu CO/CQ" },
     ],
   },
   {
     title: "Liên kết SEO",
     links: [
-      { href: "/thuong-hieu", label: "Thương hiệu thủy lực & khí nén" },
+      { href: "/#thuong-hieu", label: "Thương hiệu thủy lực & khí nén" },
       { href: "/san-pham", label: "Thiết bị thủy lực chính hãng" },
       { href: "/cam-nang", label: "Tư vấn chọn mã tương đương" },
       { href: "/lien-he", label: "Nhận báo giá thiết bị B2B" },
@@ -56,10 +57,7 @@ export function Footer() {
               <ReceiptText aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-primary" />
               <span>MST: {companyInfo.taxCode}</span>
             </p>
-            <a href={companyInfo.primaryPhoneHref} className="flex items-center gap-2 hover:text-primary">
-              <PhoneCall aria-hidden="true" className="size-4 shrink-0 text-primary" />
-              {companyInfo.phoneDisplay}
-            </a>
+            <ContactPrompt label={companyInfo.phoneDisplay} className="flex items-center gap-2 hover:text-primary" />
             <a href={companyInfo.emailHref} className="flex items-center gap-2 break-all hover:text-primary">
               <Mail aria-hidden="true" className="size-4 shrink-0 text-primary" />
               {companyInfo.email}
@@ -72,7 +70,7 @@ export function Footer() {
             <h2 className="text-label-md font-semibold uppercase tracking-wide text-primary">{column.title}</h2>
             <ul className="mt-4 space-y-3">
               {column.links.map((link) => (
-                <li key={link.href}>
+                <li key={`${column.title}-${link.label}`}>
                   <Link className="group inline-flex items-center gap-1 text-body-md text-on-surface-variant transition-colors hover:text-primary" href={link.href}>
                     {link.label}
                     <ArrowUpRight aria-hidden="true" className="size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
